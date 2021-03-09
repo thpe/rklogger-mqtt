@@ -5,9 +5,13 @@ import paho.mqtt.publish as publish
 import subprocess
 
 
+cmd = ['rklogger']
+for i in range (3, len(sys.argv)):
+  cmd.append(sys.argv[i])
 
-ret = subprocess.run(['rklogger', '-d /dev/ttyUSBDanfoss', '32', '4c', '2', '32', '8'], stdout=subprocess.PIPE)
+
+ret = subprocess.run(cmd, stdout=subprocess.PIPE)
 if ret.returncode == 1:
-  publish.single("inverter/power", float(ret.stdout), hostname=sys.argv[1])
+  publish.single(sys.argv[2], float(ret.stdout), hostname=sys.argv[1])
 print (ret.stdout)
 exit( ret.returncode)
