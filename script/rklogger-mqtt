@@ -7,7 +7,7 @@ import subprocess
 
 
 ret = subprocess.run(['rklogger', '-d /dev/ttyUSBDanfoss', '32', '4c', '2', '32', '8'], stdout=subprocess.PIPE)
-if ret.returncode = 1:
+if ret.returncode == 1:
   publish.single("inverter/power", float(ret.stdout), hostname=sys.argv[1])
 print ret.stdout
 return ret.returncode
